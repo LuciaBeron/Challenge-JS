@@ -41,9 +41,9 @@ export default function Login() {
                                 <button type="submit" className="btn btn-primary col-5">Sign in</button>
                                 
                                 
-                                <button type="submit" className="btn btn-danger col-5">
+                                <div className="btn btn-danger col-5">
                                     <Link to="/register" className="text-light" style={{textDecoration:'none'}}>Register</Link>
-                                </button>
+                                </div>
                                 
                             </div>
                         </div>
