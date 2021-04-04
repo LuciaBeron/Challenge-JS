@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Login.css'
 
 export default function Login() {
 
@@ -35,15 +34,14 @@ export default function Login() {
                             </div>
                             <div className="form-group mb-4">
                                 <label htmlFor="password" className="form-label">Password</label>
-                                <input onChange={updateState} name="password" className="form-control bg-light" placeholder="Password"></input>
+                                <input onChange={updateState} type="password" name="password" className="form-control bg-light" placeholder="Password"></input>
                             </div>
                             <div className="toolbar d-flex justify-content-around">
                                 <button type="submit" className="btn btn-primary col-5">Sign in</button>
                                 
-                                
-                                <div className="btn btn-danger col-5">
-                                    <Link to="/register" className="text-light" style={{textDecoration:'none'}}>Register</Link>
-                                </div>
+                                <Link to="/register" className="btn btn-danger col-5">                                
+                                    Register                                                     
+                                </Link>
                                 
                             </div>
                         </div>

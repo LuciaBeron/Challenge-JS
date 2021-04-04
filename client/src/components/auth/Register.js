@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Link} from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from "react-router-dom";
 
 
 export default function Register() {
+
+
 
     const [login, updateRegister] = useState({
         username: '',
@@ -24,7 +25,7 @@ export default function Register() {
 
     const validateForm = e => {
         const { username, password, email } = login;
-        if (username == '' || password == '' || email == '') {
+        if (username === '' || password === '' || email === '') {
             e.preventDefault();
             setError(true);
         }
@@ -32,7 +33,7 @@ export default function Register() {
 
     return (
  
-        <div className="container">
+        <div className="container bg-red">
             <section className="row d-flex justify-content-md-center align-items-center vh-100">
                 <section className="col-xl-4 col-md-6 col-sm-12">
                     <form onSubmit={validateForm} className="border border-danger rounded bg-light">
@@ -53,13 +54,11 @@ export default function Register() {
                                 <input onChange={updateState} name="password" className="form-control bg-light" type="password" placeholder="Password"></input>
                             </div>
                             
-                            {error && <div className="alert alert-danger" role="alert">
-                                All fields must be filled.</div>}
+                            {error && <div className="alert alert-danger" role="alert">All fields must be filled.</div>}
 
                                 <button className="btn btn-danger col-12 p-2 mb-2">Register</button>
-                                <div className="btn btn-primary col-12 p-2">
-                                    <Link to="/" className="text-light" style={{textDecoration:'none'}}>Login</Link>
-                                </div>
+                                <Link to="/" className="btn btn-primary col-12 p-2 text-light" style={{textDecoration:'none'}}>Login</Link>
+                              
                         </div>
 
                     </form>
