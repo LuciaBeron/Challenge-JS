@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
+
+
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Home from './components/home/Home' ;
@@ -10,7 +12,7 @@ const Routes = () => {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/">
+          <Route exact path="/login">
             <Login />
           </Route>
 
