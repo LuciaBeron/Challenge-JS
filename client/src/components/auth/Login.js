@@ -24,7 +24,6 @@ export default function Login() {
 
     const loginAccount = e => {
         e.preventDefault();
-        console.log("que carajos");
         Axios.post('http://localhost:3040/login', 
         {
           username:login.username, 
