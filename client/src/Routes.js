@@ -7,6 +7,8 @@ import Register from './components/auth/Register';
 import Home from './components/home/Home' ;
 import Sidebar from './components/sidebar/Sidebar';
 import Manage from './components/home/Manage';
+import Operations from './components/home/Operations'
+
 
 
 const Routes = () => {
@@ -29,6 +31,7 @@ const Routes = () => {
           <Route exact path="/manage">
             <Sidebar />
             <Manage />
+            <Operations />
           </Route>
         </Switch>
       </BrowserRouter>

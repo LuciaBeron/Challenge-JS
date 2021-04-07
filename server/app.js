@@ -171,7 +171,17 @@ app.get('/home', (req,res) => {
     })
 })
 
+app.get('/operations', (req,res) => {
+    const id = req.session.user[0].id;
+    db.query("SELECT type_of_operation, amount FROM records WHERE recordID = ?", [id],
+    (error,result) => {
+        if (error) {
+            console.log(error);
+        }
+        res.send({operations: result});
+    })
 
+})
 
 const port = process.env.port || 3040;
 
