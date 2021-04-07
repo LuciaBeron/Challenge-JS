@@ -1,16 +1,36 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import './sidebar.css';
+import Axios from 'axios';
 import { IconContext } from 'react-icons';
 
 function Navbar() {
+  let history = useHistory();
   const [sidebar, setSidebar] = useState(false);
+  const [logout, setLogout] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
+  const setLogoutState = () => {
+    console.log("Button clicked");
+    setLogout(!logout);
+  }
+
+  useEffect(() => {
+    if (logout === true) {
+    Axios.get("http://localhost:3040/logout")
+    .then(res => {
+        console.log("ok");
+        console.log(res);
+        history.push('/login');
+        
+        
+    })
+    }
+
+  },[logout]);
 
   return (
     <>
@@ -39,7 +59,7 @@ function Navbar() {
             })}
 
             <div className="bottom">
-              <button className="btn bg-light center">
+              <button onClick={setLogoutState} className="btn bg-light center">
                 Logout              
               </button> 
             </div>           

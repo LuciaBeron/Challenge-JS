@@ -1,12 +1,12 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function Records() {
+export default function Manage() {
     return (
-        <table class="table">
+        <table className="table">
             <thead className="bg-light-purple text-light">
                 <tr>
-                    <th colspan="3">
+                    <th colSpan="3">
                         <h4>Last records</h4>
                     </th>
                 </tr>                
@@ -32,7 +32,7 @@ export default function Records() {
                 </tr>
                 <tr>
                 <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
+                <td colSpan="2">Larry the Bird</td>
                 </tr>
             </tbody>
         </table>

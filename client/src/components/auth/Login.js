@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from "react-router-dom";
 import Axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css'
 
 export default function Login() {
 
+    let history = useHistory();
+
     const [login, updateLogin] = useState({
-        username: '',
+        email: '',
         password: ''
     })
 
@@ -22,23 +24,39 @@ export default function Login() {
         )
     }
 
+    Axios.defaults.withCredentials = true;
     const loginAccount = e => {
         e.preventDefault();
         Axios.post('http://localhost:3040/login', 
         {
-          username:login.username, 
+          email:login.email, 
           password:login.password
         })
         .then((res) => {
             if (res.data.message) {
                 setLoginStatus(res.data.message);
             } else {
-                setLoginStatus('');
+                history.push("/home");
+
             }
                    
         });
     }; 
 
+    useEffect(() => {
+        Axios.get("http://localhost:3040/login")
+        .then(res => {
+            console.log(res);
+            if (res.data.loggedIn === true) {
+                console.log(res.data.loggedIn === true);
+                history.push("/home");
+
+            }
+        })
+    }, [])
+
+
+    
     return (
  
         <div className="container">
@@ -50,8 +68,8 @@ export default function Login() {
                         </div>
                         <div className="m-3">
                             <div className="form-group mb-4">
-                                <label htmlFor="username" className="form-label">Username</label>
-                                <input onChange={updateState} name="username" className="form-control bg-light" placeholder="Username"></input>                       
+                                <label htmlFor="email" className="form-label">Email</label>
+                                <input onChange={updateState} name="email" className="form-control bg-light" placeholder="Email"></input>                       
                             </div>
                             <div className="form-group mb-4">
                                 <label htmlFor="password" className="form-label">Password</label>
