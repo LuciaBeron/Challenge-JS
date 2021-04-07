@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Balance() {
+
+
     return (
             
         <div>
@@ -15,7 +17,7 @@ export default function Balance() {
                         <div className="card-body">
                             <p className="card-text text-dark">
                                 <h1 className="text-center">
-                                    $ 5
+                                    
                                 </h1>
                             </p>
                         </div>

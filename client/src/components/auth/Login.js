@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import Axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './styles.css'
+import '../styles.css'
 
 export default function Login() {
 
@@ -37,9 +37,7 @@ export default function Login() {
                 setLoginStatus(res.data.message);
             } else {
                 history.push("/home");
-
             }
-                   
         });
     }; 
 
@@ -50,10 +48,9 @@ export default function Login() {
             if (res.data.loggedIn === true) {
                 console.log(res.data.loggedIn === true);
                 history.push("/home");
-
             }
         })
-    }, [])
+    })
 
 
     

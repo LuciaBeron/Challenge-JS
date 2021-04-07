@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import Axios from 'axios';
 
-
+ 
 
 export default function Register() {
 
-    
-
     const [reg, updateRegister] = useState({
-        username: '',
         password: '',
         email: ''
     })
@@ -27,8 +24,8 @@ export default function Register() {
     const [error, setError] = useState(false);
 
     const validateForm = e => {
-        const { username, password, email } = reg;
-        if (username === '' || password === '' || email === '') {
+        const { password, email } = reg;
+        if ( password === '' || email === '') {
             e.preventDefault();
             setError(true);
         }
@@ -40,14 +37,14 @@ export default function Register() {
         Axios.post('http://localhost:3040/register', 
 
         {
-          username:reg.username, 
           password:reg.password, 
           email:reg.email
         })
         .then((res) => {
-            console.log(res);
-        
+            console.log(res);        
         });
+
+
         
 
     }; 
@@ -62,10 +59,7 @@ export default function Register() {
                             REGISTER
                         </div>
                         <div className="m-3">
-                            <div className="form-group mb-4">
-                                <label htmlFor="username" className="form-label">Username</label>
-                                <input onChange={updateState} name="username" className="form-control bg-light" placeholder="Username"></input>                       
-                            </div>
+
                             <div className="form-group mb-4">
                                 <label htmlFor="email" className="form-label">Email</label>
                                 <input onChange={updateState} name="email" className="form-control bg-light" placeholder="Email"></input>                       

@@ -51,7 +51,6 @@ db.connect(function(err) {
 // ROUTES
 app.post('/register',(req,res) => {
 
-    const username = req.body.username;
     const password = req.body.password;
     const email = req.body.email;
 
@@ -59,8 +58,8 @@ app.post('/register',(req,res) => {
         if (err) {
             console.log(err);
         }
-        db.query("INSERT INTO users (username, password, email) VALUES (?,?,?)",
-        [username,hash,email],
+        db.query("INSERT INTO users (password, email) VALUES (?,?)",
+        [hash,email],
         (err,res) => {
             if (err) {
                 console.log(err);
@@ -110,12 +109,24 @@ app.get('/login', (req,res) => {
 app.get('/logout', (req,res) => {
     console.log("Logout request!")
     req.session.destroy();
-    res.send("Session destroyed");
+    res.send("logged out");
     
 })
 
 
 
+app.post('/manage', (req,res) => {
+    const type = req.body.type;
+    const date = req.body.date;
+    const amount = req.body.amount;
+    const id = req.session.user[0].id;
+
+    db.query("INSERT INTO records (type_of_operation,amount,operationDate, recordID) values (?,?,?,?)",[type,amount,date,id],
+    (err,res) => {
+        console.log(err);
+    })
+
+})
 
 
 const port = process.env.port || 3040;

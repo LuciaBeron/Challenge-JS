@@ -3,7 +3,7 @@ import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import { Link, useHistory } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
-import './sidebar.css';
+import '../styles.css';
 import Axios from 'axios';
 import { IconContext } from 'react-icons';
 
@@ -20,17 +20,25 @@ function Navbar() {
 
   useEffect(() => {
     if (logout === true) {
-    Axios.get("http://localhost:3040/logout")
-    .then(res => {
-        console.log("ok");
-        console.log(res);
-        history.push('/login');
-        
-        
-    })
-    }
+      Axios.get("http://localhost:3040/logout")
+      .then(res => {
+          console.log("ok");
+          console.log(res);
+          history.push('/login');
+    })}
+  });
 
-  },[logout]);
+  useEffect(() => {
+
+      Axios.get("http://localhost:3040/login")
+      .then(res => {
+          if (res.data.loggedIn === false) {
+            history.push('/login');
+          }
+    })}
+  );
+
+
 
   return (
     <>

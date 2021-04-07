@@ -1,3 +1,18 @@
+
+
+.border-purple {
+    border: 1px solid #412272;   ;
+}
+
+.bg-purple {
+    background-color: #412272;
+}
+
+.bg-light-purple {
+    background-color: #594181;
+
+}
+
 .navbar {
     background-color: #060b26;
     height: 60px;
@@ -84,3 +99,4 @@
     border-radius: 7px;
     font-size: 18px;
 }
+
