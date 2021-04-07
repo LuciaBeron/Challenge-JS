@@ -158,7 +158,17 @@ app.post('/manage', (req,res) => {
     (err,res) => {
         console.log(err);
     })
+})
 
+app.get('/home', (req,res) => {
+    const id = req.session.user[0].id;
+    db.query("SELECT type_of_operation, amount FROM records WHERE recordID = ? LIMIT 10", [id],
+    (error,result) => {
+        if (error) {
+            console.log(error);
+        }
+        res.send({operations: result});
+    })
 })
 
 
@@ -166,7 +176,7 @@ app.post('/manage', (req,res) => {
 const port = process.env.port || 3040;
 
 
-app.listen(port, () =>{
+app.listen(port, () => {
     console.log("Running server", port);
 });
 

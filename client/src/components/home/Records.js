@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function Manage() {
+export default function Records({operations}) {
     return (
         <table className="table">
             <thead className="bg-light-purple text-light">
@@ -14,26 +14,21 @@ export default function Manage() {
                      
             <thead>
                 <tr>
-                <th scope="col">#</th>
                 <th scope="col">Amount</th>
                 <th scope="col">Type</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                </tr>
-                <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                </tr>
-                <tr>
-                <th scope="row">3</th>
-                <td colSpan="2">Larry the Bird</td>
-                </tr>
+            <tbody>                    
+                { 
+                    operations.map(item => {
+                        return (
+                        <tr>
+                        <td>{item.amount}</td>
+                        <td>{item.type_of_operation}</td>                        
+                        </tr>
+                        )
+                    })
+                } 
             </tbody>
         </table>
     )
