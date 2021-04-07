@@ -115,6 +115,39 @@ app.get('/logout', (req,res) => {
 
 
 
+app.get('/balance',(req,res) => {
+    const id = req.session.user[0].id;
+
+    db.query("SELECT SUM(amount) as deposits FROM records WHERE recordID = ? AND type_of_operation = 'deposit'", [id],
+    (err,deposits) => {
+        if (err) {
+            console.log(err);
+        } 
+
+        db.query("SELECT SUM(amount) as substract FROM records WHERE RecordID = ? AND type_of_operation = 'withdrawal'", [id],(error,withdrawals) => { 
+            if (error) {
+                console.log(error);
+            } 
+
+            const sum = (add, subst) =>{
+                if (add == null) {
+                    add = 0;
+                }
+                if (subst == null) {
+                    subst = 0;
+                }
+                return (add-subst);
+            }
+                    
+            res.send({balance:  sum(deposits[0].deposits, withdrawals[0].substract)});
+            
+        })
+
+    })
+
+})
+
+
 app.post('/manage', (req,res) => {
     const type = req.body.type;
     const date = req.body.date;
@@ -127,6 +160,7 @@ app.post('/manage', (req,res) => {
     })
 
 })
+
 
 
 const port = process.env.port || 3040;

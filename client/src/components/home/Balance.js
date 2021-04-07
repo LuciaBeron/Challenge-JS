@@ -1,7 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Axios from 'axios';
+
 
 export default function Balance() {
+
+    const [balance, setBalance] = useState(0);
+
+    Axios.defaults.withCredentials = true;
+    useEffect(() =>{
+        Axios.get("http://localhost:3040/balance")
+        .then(res => {
+            setBalance(res.data.balance);       
+        })
+    }, [])
 
 
     return (
@@ -17,7 +29,7 @@ export default function Balance() {
                         <div className="card-body">
                             <p className="card-text text-dark">
                                 <h1 className="text-center">
-                                    
+                                    {balance}
                                 </h1>
                             </p>
                         </div>
