@@ -21,6 +21,7 @@ function Navbar() {
     if (logout === true) {
       Axios.get("http://localhost:3040/logout")
       .then(res => {
+        console.log(res);
           history.push('/login');
     })}
   });

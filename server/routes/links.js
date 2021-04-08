@@ -47,9 +47,8 @@ router.post('/manage', (req,res) => {
     (err,result) => {
         if (err) {
             console.log(err);
-        }
-        
-    })
+   
+    }})
 })
 
 router.get('/home', (req,res) => {

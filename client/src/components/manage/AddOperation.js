@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+export default function AddOperation() {
 
-export default function Manage() {
     const [record, updateRecord] = useState(
         {
             type: '',

@@ -42,10 +42,7 @@ export default function Register() {
         .then((res) => {
             setError(res.data.message);
    
-        });
-
-
-        
+        });      
 
     }; 
 

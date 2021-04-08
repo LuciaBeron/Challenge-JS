@@ -67,6 +67,7 @@ router.get('/login', (req,res) => {
 
 router.get('/logout', (req,res) => {
     req.session.destroy();
+    res.send("Logout");
     
 })
 
