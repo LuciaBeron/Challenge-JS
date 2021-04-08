@@ -4,7 +4,7 @@ USE challengeDB;
 
 -- USERS TABLE --
 CREATE TABLE IF NOT EXISTS users(
-    email varchar(20) NOT NULL,
+    email varchar(50) NOT NULL,
     password varchar (60) NOT NULL,
     id INT(11) NOT NULL,
     PRIMARY KEY (id)

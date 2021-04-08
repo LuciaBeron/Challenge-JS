@@ -44,9 +44,7 @@ export default function Login() {
     useEffect(() => {
         Axios.get("http://localhost:3040/login")
         .then(res => {
-            console.log(res);
             if (res.data.loggedIn === true) {
-                console.log(res.data.loggedIn === true);
                 history.push("/home");
             }
         })

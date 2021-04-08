@@ -48,9 +48,7 @@ export default function Operations() {
 
 
     const changeRecord = e => {
-        Axios.put("http://localhost:3040/operations", {id: id, form}, (err,res) => {
-            console.log("changes applied");
-        }).then((res) => {
+        Axios.put("http://localhost:3040/operations", {id: id, form}).then((res) => {
             window.location.reload();
         })
     }

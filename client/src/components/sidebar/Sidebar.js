@@ -14,7 +14,6 @@ function Navbar() {
 
   const showSidebar = () => setSidebar(!sidebar);
   const setLogoutState = () => {
-    console.log("Button clicked");
     setLogout(!logout);
   }
 
@@ -22,8 +21,6 @@ function Navbar() {
     if (logout === true) {
       Axios.get("http://localhost:3040/logout")
       .then(res => {
-          console.log("ok");
-          console.log(res);
           history.push('/login');
     })}
   });

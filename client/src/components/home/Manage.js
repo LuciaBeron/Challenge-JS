@@ -34,15 +34,11 @@ export default function Manage() {
             amount: record.amount,
             date: record.date
         })
-        .then((res) => {
-            console.log("added");
-           
-        })
     }
  
     return (
         <div className="container">  
-            <div className="text-center mt-3">       
+            <div className="text-center mt-4">       
             <button className="btn btn-primary p-4" onClick={openForm}>
                 New Operation +
             </button>

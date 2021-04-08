@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Axios from 'axios';
 
  
@@ -18,10 +18,9 @@ export default function Register() {
                 [e.target.name]: e.target.value
             }
         )
-        console.log(reg);
     }
 
-    const [error, setError] = useState(false);
+    const [error, setError] = useState('');
 
     const validateForm = e => {
         const { password, email } = reg;
@@ -41,7 +40,8 @@ export default function Register() {
           email:reg.email
         })
         .then((res) => {
-            console.log(res);        
+            setError(res.data.message);
+   
         });
 
 
@@ -69,7 +69,8 @@ export default function Register() {
                                 <input onChange={updateState} name="password" className="form-control bg-light" type="password" placeholder="Password"></input>
                             </div>
                             
-                            {error && <div className="alert alert-danger" role="alert">All fields must be filled.</div>}
+                            {error === '' ? null : <div className="alert alert-danger" role="alert">{error}</div>}
+                            
 
                                 <button onClick={register} className="btn text-light bg-purple col-12 p-2 mb-2">
                                     Register

@@ -18,7 +18,7 @@ export default function Balance() {
 
     return (
             
-        <div>
+        <div className="ml-3">
                 <section className="row">
                     <div className="card text-white mb-3">
                         <div className="card-header bg-purple">

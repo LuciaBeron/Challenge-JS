@@ -7,10 +7,12 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 
+
 const mysql = require('mysql');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+const db = require('./config/db');
 
 // MIDDLEWARE
 app.use(cors({
@@ -35,18 +37,7 @@ app.use(
     })
   );
 
-// DATABASE CONNECTION
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password:'',
-    database: 'challengeDB'
-})
 
-db.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-});
 
 // ROUTES
 app.post('/register',(req,res) => {
@@ -60,10 +51,13 @@ app.post('/register',(req,res) => {
         }
         db.query("INSERT INTO users (password, email) VALUES (?,?)",
         [hash,email],
-        (err,res) => {
+        (err,result) => {
             if (err) {
                 console.log(err);
-            }        
+                res.send({message: "Couldn't create account"})
+            } else {
+            res.send({message: "Account created!"})
+            }
         })
         
     })
