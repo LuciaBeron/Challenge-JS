@@ -22,8 +22,9 @@ CREATE TABLE IF NOT EXISTS records(
     operationID INT(11) NOT NULL,
     userID INT(11) NOT NULL,
     operationDate DATE,
-    PRIMARY KEY(userID)
-    FOREIGN KEY(recordID) REFERENCES users(id)	
+    concept varchar(40) NOT NULL,
+    PRIMARY KEY(operationID),
+    FOREIGN KEY(userID) REFERENCES users(id)	
 
 );
 

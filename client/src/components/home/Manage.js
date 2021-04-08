@@ -8,7 +8,8 @@ export default function Manage() {
         {
             type: '',
             amount: '',
-            date: ''
+            date: '',
+            concept: ''
         }
     )
     const [newOperation,popForm] = useState(false);
@@ -32,7 +33,8 @@ export default function Manage() {
         {
             type: record.type,
             amount: record.amount,
-            date: record.date
+            date: record.date,
+            concept: record.concept
         })
     }
  
@@ -61,6 +63,12 @@ export default function Manage() {
                 <label for="date" class="form-label">Date:</label>
                 <input onChange={updateState} className="form-control" id="date" name="date" type="date"></input>
                 </div>
+                
+                <div className="form-group">
+                <label for="concept" class="form-label">Concept:</label>
+                <input onChange={updateState} className="form-control" id="concept" name="concept" type="text"></input>
+                </div>
+                
                 <button onClick={addRecord} className="btn btn-outline-primary w-100">Add</button>
                 
             </form>  

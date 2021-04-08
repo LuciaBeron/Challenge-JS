@@ -10,7 +10,8 @@ export default function Operations() {
     const [id, setId] = useState(0);
     const [form, updateForm] = useState({
         amount: '',
-        date: ''
+        date: '',
+        concept: ''
     })
     const updateState = e => {
         updateForm({
@@ -59,7 +60,7 @@ export default function Operations() {
         <table className="table w-75 mx-auto mt-5">
             <thead className="bg-light-purple text-light">
                 <tr>
-                    <th colSpan="5">
+                    <th colSpan="6">
                         <h4>All operations</h4>
                     </th>
                 </tr>                
@@ -70,6 +71,7 @@ export default function Operations() {
                 <th scope="col">Amount</th>
                 <th scope="col">Type</th>
                 <th scope="col">Date</th>
+                <th scope="col">Concept</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
                 </tr>
@@ -81,7 +83,8 @@ export default function Operations() {
                         <tr key={item.operationID}>
                         <td>{item.amount}</td>
                         <td className="text-capitalize">{item.type_of_operation}</td>       
-                        <td>{(item.operationDate.split("T"))[0]}</td>                              
+                        <td>{(item.operationDate.split("T"))[0]}</td>      
+                        <td>{item.concept}</td>                        
                         <td>
                             <MdIcons.MdDelete 
                                 role="button" 
@@ -113,6 +116,10 @@ export default function Operations() {
                 <div className="form-group">
                 <label for="date" class="form-label">Date:</label>
                 <input onChange={updateState} className="form-control" id="date" name="date" type="date"></input>
+                </div>
+                <div className="form-group">
+                <label for="concept" class="form-label">Concept:</label>
+                <input onChange={updateState} className="form-control" id="concept" name="concept" type="text"></input>
                 </div>
                 <div onClick={changeRecord} className="btn btn-outline-primary w-100">Change</div>
                 <div onClick={editOperation} className="btn btn-outline-danger w-100">Close</div> 

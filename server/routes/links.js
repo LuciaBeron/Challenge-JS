@@ -39,9 +39,11 @@ router.post('/manage', (req,res) => {
     const type = req.body.type;
     const date = req.body.date;
     const amount = req.body.amount;
+    const concept = req.body.concept;
     const id = req.session.user[0].id;
 
-    db.query("INSERT INTO records (type_of_operation,amount,operationDate, userID) values (?,?,?,?)",[type,amount,date,id],
+    db.query("INSERT INTO records (type_of_operation,amount,operationDate, userID, concept) values (?,?,?,?,?)",
+    [type,amount,date,id,concept],
     (err,result) => {
         if (err) {
             console.log(err);
@@ -63,7 +65,7 @@ router.get('/home', (req,res) => {
 
 router.get('/operations', (req,res) => {
     const id = req.session.user[0].id;
-    db.query("SELECT type_of_operation, amount,operationID, operationDate FROM records WHERE userID = ?", [id],
+    db.query("SELECT type_of_operation, amount,operationID, operationDate, concept FROM records WHERE userID = ?", [id],
     (error,result) => {
         if (error) {
             console.log(error);
@@ -75,7 +77,6 @@ router.get('/operations', (req,res) => {
 
 router.delete('/operations',(req,res) => {
     const id = req.body.id;
-    console.log("ID??: ",id);
     db.query("DELETE FROM records WHERE operationID = ?", [id], (err,result) => {
         if (err) {
             console.log(err);
@@ -88,8 +89,10 @@ router.put('/operations',(req,res) => {
     const id = req.body.id;
     const amount = req.body.form.amount;
     const date = req.body.form.date;
+    const concept = req.body.form.concept;
     
-    db.query("UPDATE records SET amount = ?, operationDate = ? WHERE operationID = ?", [amount,date,id]
+    db.query("UPDATE records SET amount = ?, operationDate = ?, concept = ? WHERE operationID = ?",
+     [amount,date,concept,id]
     ,(err,result) => {
         if (err) {
             console.log(err);
