@@ -15,7 +15,7 @@ const saltRounds = 10;
 // MIDDLEWARE
 app.use(cors({
     origin: ["http://localhost:3000"],
-    methods: ["GET", "POST", "DELETE"],
+    methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true
 }));
 
@@ -30,7 +30,7 @@ app.use(
       resave: false,
       saveUninitialized: false,
       cookie: {
-        expires: 60 * 60 * 24 
+        expires: 60 * 60 * 24 * 1000
       },
     })
   );
@@ -107,9 +107,7 @@ app.get('/login', (req,res) => {
 })
 
 app.get('/logout', (req,res) => {
-    console.log("Logout request!")
     req.session.destroy();
-    res.send("logged out");
     
 })
 
@@ -155,8 +153,11 @@ app.post('/manage', (req,res) => {
     const id = req.session.user[0].id;
 
     db.query("INSERT INTO records (type_of_operation,amount,operationDate, userID) values (?,?,?,?)",[type,amount,date,id],
-    (err,res) => {
-        console.log(err);
+    (err,result) => {
+        if (err) {
+            console.log(err);
+        }
+        
     })
 })
 
@@ -191,6 +192,21 @@ app.delete('/operations',(req,res) => {
             console.log(err);
         }
         res.send("Deleted");
+    })
+})
+
+app.put('/operations',(req,res) => {
+    const id = req.body.id;
+    const amount = req.body.form.amount;
+    const date = req.body.form.date;
+    
+    db.query("UPDATE records SET amount = ?, operationDate = ? WHERE operationID = ?", [amount,date,id]
+    ,(err,result) => {
+        if (err) {
+            console.log(err);
+        }
+        res.send("changes done");
+
     })
 })
 

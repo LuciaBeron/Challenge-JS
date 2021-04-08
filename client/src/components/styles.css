@@ -100,3 +100,18 @@
     font-size: 18px;
 }
 
+.active-form {
+  display: block;
+  margin: auto;
+  z-index:1;
+  opacity: 1;;
+}
+
+.closed {
+  display: none;
+}
+
+.open {
+  display:block;
+  z-index:1;
+}

@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 export default function Manage() {
-
     const [record, updateRecord] = useState(
         {
             type: '',
@@ -12,6 +11,10 @@ export default function Manage() {
             date: ''
         }
     )
+    const [newOperation,popForm] = useState(false);
+    const openForm = () => {
+        popForm(!newOperation);
+    }
 
     const updateState = e => {
         updateRecord(
@@ -32,14 +35,19 @@ export default function Manage() {
             date: record.date
         })
         .then((res) => {
-            console.log(res);
+            console.log("added");
+           
         })
     }
-
-
+ 
     return (
-        <div>            
-
+        <div className="container">  
+            <div className="text-center mt-3">       
+            <button className="btn btn-primary p-4" onClick={openForm}>
+                New Operation +
+            </button>
+            </div>  
+            <div className={newOperation ? "open" : "closed"}>
             <form className="form col-xl-4 col-md-6 col-sm-10 mx-auto mt-4 border border-dark p-3">
                 
                 <div className="card-header bg-purple text-light"><h3>New operation</h3></div>
@@ -59,7 +67,8 @@ export default function Manage() {
                 </div>
                 <button onClick={addRecord} className="btn btn-outline-primary w-100">Add</button>
                 
-            </form>      
+            </form>  
+            </div>    
         </div>
     )
 }

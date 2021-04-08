@@ -11,7 +11,6 @@ export default function Home() {
     const [operations, setOperations] = useState([])
 
     useEffect(() => {
-        console.log("EXECUTED");
         Axios.get("http://localhost:3040/home")
         .then(res => {
             setOperations(res.data.operations);
