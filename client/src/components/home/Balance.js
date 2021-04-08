@@ -11,7 +11,7 @@ export default function Balance() {
     useEffect(() =>{
         Axios.get("http://localhost:3040/balance")
         .then(res => {
-            setBalance(res.data.balance);       
+            setBalance(res.data.balance);
         })
     }, [])
 

@@ -15,7 +15,7 @@ const saltRounds = 10;
 // MIDDLEWARE
 app.use(cors({
     origin: ["http://localhost:3000"],
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "DELETE"],
     credentials: true
 }));
 
@@ -118,13 +118,13 @@ app.get('/logout', (req,res) => {
 app.get('/balance',(req,res) => {
     const id = req.session.user[0].id;
 
-    db.query("SELECT SUM(amount) as deposits FROM records WHERE recordID = ? AND type_of_operation = 'deposit'", [id],
+    db.query("SELECT SUM(amount) as deposits FROM records WHERE userID = ? AND type_of_operation = 'deposit'", [id],
     (err,deposits) => {
         if (err) {
             console.log(err);
         } 
 
-        db.query("SELECT SUM(amount) as substract FROM records WHERE RecordID = ? AND type_of_operation = 'withdrawal'", [id],(error,withdrawals) => { 
+        db.query("SELECT SUM(amount) as substract FROM records WHERE userID = ? AND type_of_operation = 'withdrawal'", [id],(error,withdrawals) => { 
             if (error) {
                 console.log(error);
             } 
@@ -154,7 +154,7 @@ app.post('/manage', (req,res) => {
     const amount = req.body.amount;
     const id = req.session.user[0].id;
 
-    db.query("INSERT INTO records (type_of_operation,amount,operationDate, recordID) values (?,?,?,?)",[type,amount,date,id],
+    db.query("INSERT INTO records (type_of_operation,amount,operationDate, userID) values (?,?,?,?)",[type,amount,date,id],
     (err,res) => {
         console.log(err);
     })
@@ -162,7 +162,7 @@ app.post('/manage', (req,res) => {
 
 app.get('/home', (req,res) => {
     const id = req.session.user[0].id;
-    db.query("SELECT type_of_operation, amount FROM records WHERE recordID = ? LIMIT 10", [id],
+    db.query("SELECT type_of_operation, amount FROM records WHERE userID = ? LIMIT 10", [id],
     (error,result) => {
         if (error) {
             console.log(error);
@@ -173,7 +173,7 @@ app.get('/home', (req,res) => {
 
 app.get('/operations', (req,res) => {
     const id = req.session.user[0].id;
-    db.query("SELECT type_of_operation, amount FROM records WHERE recordID = ?", [id],
+    db.query("SELECT type_of_operation, amount,operationID, operationDate FROM records WHERE userID = ?", [id],
     (error,result) => {
         if (error) {
             console.log(error);
@@ -181,6 +181,17 @@ app.get('/operations', (req,res) => {
         res.send({operations: result});
     })
 
+})
+
+app.delete('/operations',(req,res) => {
+    const id = req.body.id;
+    console.log("ID??: ",id);
+    db.query("DELETE FROM records WHERE operationID = ?", [id], (err,result) => {
+        if (err) {
+            console.log(err);
+        }
+        res.send("Deleted");
+    })
 })
 
 const port = process.env.port || 3040;

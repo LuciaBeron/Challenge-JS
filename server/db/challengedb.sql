@@ -19,9 +19,16 @@ ALTER TABLE users
 CREATE TABLE IF NOT EXISTS records(
 	type_of_operation enum('withdrawal','deposit'),
     amount integer NOT NULL,
-    recordID INT(11) NOT NULL,
+    operationID INT(11) NOT NULL,
+    userID INT(11) NOT NULL,
     operationDate DATE,
-    FOREIGN KEY(recordID) REFERENCES users(id)		
+    PRIMARY KEY(userID)
+    FOREIGN KEY(recordID) REFERENCES users(id)	
+
 );
+
+ALTER TABLE records
+	MODIFY operationID integer NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 2;
+
 
    
